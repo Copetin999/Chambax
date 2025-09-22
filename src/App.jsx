@@ -4,8 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SearchInput from "./components/SearchInput";
 import Card from "./components/Card";
+import { useAuth } from './context/AuthContext';
 
 export default function App() {
+  const { logout } = useAuth()
   const [usuarios, setUsuarios] = useState([]);
   const [filtrados, setFiltrados] = useState([]);
   const [error, setError] = useState(null);
@@ -54,7 +56,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8 space-y-4">
-      <h1 className="text-3xl font-bold text-center mb-4">Buscador de Usuarios</h1>
+      <button className="bg-red-500 text-white px-3 py-1 rounded float-right" onClick={logout}>
+        LOGOUT
+      </button>
+      <h1 
+      className="text-3xl font-bold text-center mb-4">
+        Buscador de Usuarios
+        </h1>
 
       <SearchInput onSearch={filtrarUsuarios} loading={loading} />
 
